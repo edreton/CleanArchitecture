@@ -1,0 +1,31 @@
+﻿@{
+    ViewData["Title"] = "Clean DDD Architecture Sample";
+}
+
+<h2>Home</h2>
+<br />
+
+<div class="row">
+    <div class="col-md-12">
+        <h3>Usando esta aplicacion web</h3>
+        <p>
+            Requerimientos: Visual Studio 2022 + Syncfusion components (Nuget package)
+            <ul>
+                <li>Clonar el repositorio Github desde: https://github.com/ardalis/CleanArchitecture</li>
+                <li>Realizar la compilacion en Visual Studio 2022 para que se descarguen los paquetes Nuget necesarios</li>
+                <li>Modificar el connectionstring si se requiere en el archivo appsettings.json dentro del proyecto de solucion web</li>
+                <li>La primera ejecucion creará la base de datos y agregará algunos registros iniciales</li>
+                <li>La aplicacion esta configurada para uso con Sql Server pero puede modificarse facilmente para usar con SqLite cambiando los siguientes archivos:</li>
+                <li>
+                    En el archivo StartupSetup descomentar: //options.UseSqlite(connectionString)) y comentar la linea posterior; 
+                    En el archivo Program.cs del proyecto Clean.Architecture.Web: string? connectionString = builder.Configuration.GetConnectionString("DefaultConnection"); cambiarlo por SqliteConnection
+                </li>
+                <li>Dentro de appSettings.json en el proyecto web, tambien puede configurar la url "MainServiceUrl" del servicio de la Api</li>
+                <li>Puede navegar adicionalmente por la ayuda de la API para mas informacion acerca de los endpoints disponibles</li>
+            </ul>
+        </p>
+        <p>
+            Repositorio Github para la descarga: <a href="https://github.com/ardalis/CleanArchitecture">Person Catalog</a>
+        </p>
+    </div>
+</div>

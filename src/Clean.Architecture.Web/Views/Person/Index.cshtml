@@ -1,0 +1,62 @@
+﻿@{
+    ViewData["Title"] = "Red Efectiva - Test Tecnico";
+    ViewData["MainServiceUrl"] = ViewBag.MainServiceUrl;
+
+    List<object> commands = new List<object>();
+    commands.Add(new { type = "Edit", buttonOption = new { iconCss = "e-icons e-edit", cssClass = "e-flat" } });
+    commands.Add(new { type = "Delete", buttonOption = new { iconCss = "e-icons e-delete", cssClass = "e-flat" } });
+    commands.Add(new { type = "Save", buttonOption = new { iconCss = "e-icons e-update", cssClass = "e-flat" } });
+    commands.Add(new { type = "Cancel", buttonOption = new { iconCss = "e-icons e-cancel-icon", cssClass = "e-flat" } });
+}
+
+@section Head{
+    <link href="https://cdn.syncfusion.com/ej2/material.css" rel="stylesheet" />
+    <link href="https://cdn.syncfusion.com/ej2/ej2-base.css" rel="stylesheet" />
+    <link href="https://cdn.syncfusion.com/ej2/ej2-buttons.css" rel="stylesheet" />
+    <link href="https://cdn.syncfusion.com/ej2/ej2-dropdowns.css" rel="stylesheet" />
+    <link href="https://cdn.syncfusion.com/ej2/ej2-inputs.css" rel="stylesheet" />
+    <link href="https://cdn.syncfusion.com/ej2/ej2-lists.css" rel="stylesheet" />
+    <link href="https://cdn.syncfusion.com/ej2/ej2-navigations.css" rel="stylesheet" />
+    <link href="https://cdn.syncfusion.com/ej2/ej2-popups.css" rel="stylesheet" />
+    <link href="https://cdn.syncfusion.com/ej2/ej2-splitbuttons.css" rel="stylesheet" />
+    <link href="https://cdn.syncfusion.com/ej2/ej2-grids.css" rel="stylesheet" />
+    <script src="https://cdn.syncfusion.com/ej2/dist/ej2.min.js"></script>
+}
+
+@model List<Clean.Architecture.Web.ViewModels.PersonViewModel>
+@using Syncfusion.EJ2.Grids
+@using Clean.Architecture.Web.ApiModels
+
+<input type="hidden" id="apiUrl" value="@ViewBag.MainServiceUrl" />
+
+<h2>Person Catalog</h2>
+<br />
+
+<div class="container-fluid">
+
+    <ejs-grid id="datagrid-persons" TValue="ViewBag.Type" actionComplete="App.Person.actionComplete"  actionBegin="App.Person.actionBegin" dataSource=@Model dataSourceChanged="App.Person.onDataSourceChanged" enableStickyHeader="true" allowPaging="true" allowSorting="true" toolbar="@(new List<string>() { "Add" })">
+
+        <e-grid-editSettings allowAdding="true" allowDeleting="true" allowEditing="true" allowEditOnDblClick="false" showDeleteConfirmDialog="true"></e-grid-editSettings>
+        <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+        <e-grid-columns>
+            <e-grid-column field="Id" headerText="ID" isPrimaryKey="true" isIdentity="true" textAlign="Center" contenteditable="false" width="100"></e-grid-column>
+            <e-grid-column field="FirstName" headerText="First Name" type="string" width="120"></e-grid-column>
+            <e-grid-column field="LastName" headerText="Last Name" type="string" width="120"></e-grid-column>
+            <e-grid-column field="Email" headerText="Email" type="string" width="120"></e-grid-column>
+            <e-grid-column field="PhoneNumber" headerText="Phone Number" type="string" width="120"></e-grid-column>
+            <e-grid-column field="Age" headerText="Age" textAlign="Center" editType="numericedit" width="120"
+                           edit="@(new { @params = new Syncfusion.EJ2.Inputs.NumericTextBox() {
+                            ValidateDecimalOnType = true,
+                            Decimals = 0,
+                            Format = "N"
+                           }
+            })"></e-grid-column>
+            <e-grid-column headerText="Manage Records" width="150" commands="commands"></e-grid-column>
+        </e-grid-columns>
+    </ejs-grid>
+</div>
+
+
+@section Scripts {
+    <script src="~/js/person/personScripts.js"></script>
+}
